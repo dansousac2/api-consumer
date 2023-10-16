@@ -9,14 +9,14 @@ import com.unidac.consumerimvunidac.entities.DataToSend;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class CnpjAndDataListDto {
 
-	@CNPJ(message = "CNPJ encontra-se com formato incorreto")
 	private String cnpj;
 	
 	@NotEmpty(message = "A lista de dados encontra-se vazia")
