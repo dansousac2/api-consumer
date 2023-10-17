@@ -32,6 +32,7 @@ public class TokenFilter extends OncePerRequestFilter {
 			if(tokenService.getFromHttpServlet(request) == null) {
 				throw new IllegalArgumentException("Token nulo ou inválido");
 			}
+			System.out.println("Token encontrado. Proseguindo com requisição.");
 		}
 		
 		filterChain.doFilter(request, response);
