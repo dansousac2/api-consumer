@@ -15,6 +15,7 @@ import com.unidac.consumerimvunidac.exceptions.InvalidTokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class TokenServiceImpl implements TokenService {
@@ -80,6 +81,16 @@ public class TokenServiceImpl implements TokenService {
 	@Override
 	public List<DataToSend> getDataList(String token) {
 		return (List<DataToSend>) getClaims(token).get(CLAIM_DATA_LIST);
+	}
+
+	@Override
+	public String getFromHttpServlet(HttpServletRequest request) {
+		String authorization = request.getHeader("Authorization");
+		if(authorization == null || !authorization.startsWith("Bearer")) {
+			return null;
+		}
+		
+		return authorization.split(" ")[1];
 	}
 
 }

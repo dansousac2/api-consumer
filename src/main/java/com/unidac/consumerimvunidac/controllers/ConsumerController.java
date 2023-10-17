@@ -15,6 +15,7 @@ import com.unidac.consumerimvunidac.entities.DataToSend;
 import com.unidac.consumerimvunidac.services.CnpjService;
 import com.unidac.consumerimvunidac.services.TokenServiceImpl;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
@@ -26,6 +27,10 @@ public class ConsumerController {
 	
 	@Autowired
 	private TokenServiceImpl tokenService;
+	
+	// pegar request atual
+	@Autowired
+	private HttpServletRequest request;
 	
 	@GetMapping("/gettoken")
 	public ResponseEntity<String> getToken(@RequestBody @Valid CnpjAndDataListDto dto) {
@@ -42,8 +47,9 @@ public class ConsumerController {
 	}
 	
 	@PostMapping("/senddata")
-	public ResponseEntity<String> sendDataToken(@RequestBody String token) {
+	public ResponseEntity<String> sendDataToken() {
 		try {
+			String token = tokenService.getFromHttpServlet(request);
 			// lança exeção em caso negativo
 			tokenService.isValidToken(token);
 			

@@ -6,6 +6,7 @@ import com.unidac.consumerimvunidac.entities.DataToSend;
 import com.unidac.consumerimvunidac.exceptions.InvalidTokenException;
 
 import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface TokenService {
 
@@ -14,4 +15,5 @@ public interface TokenService {
 	boolean isValidToken(String token) throws InvalidTokenException;
 	String getCnpj(String token);
 	List<DataToSend> getDataList(String token);
+	String getFromHttpServlet(HttpServletRequest request);
 }
